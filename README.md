@@ -1,2 +1,3 @@
 # sandbox-react
-Putting lectures into practice :muscle;
+
+Putting theory into practice :muscle;
