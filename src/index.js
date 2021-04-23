@@ -5,7 +5,7 @@ import "./index.css";
 const Square = ({ value, onClick }) => {
   return (
     <button className="square" onClick={onClick}>
-      {!value ? null : value === "X" ? <span>🐑</span> : <span>🐺</span>}
+      {!value ? null : value === "X" ? <span>☕</span> : <span>🥐</span>}
     </button>
   );
 };
