@@ -1,3 +1,19 @@
+# Notes
+## React Hooks
+- useState()
+- useEffect()
+- useRef()
+- useMemo()
+- useCallback()
+- useContext()
+
+## Something else is comming :)
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
