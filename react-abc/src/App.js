@@ -17,6 +17,20 @@ function App() {
         value={value}
         onChange={event => setValue(event.target.value)}
       />
+
+      <div className="post">
+        <div className="post__content">
+          <p>
+            <strong>1. JavaScript</strong>
+          </p>
+
+          <p>JS - one of the programming languages, used widely in browsers.</p>
+        </div>
+
+        <div className="post__btns">
+          <button>Delete</button>
+        </div>
+      </div>
     </div>
   );
 }
