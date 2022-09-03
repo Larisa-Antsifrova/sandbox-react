@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ClassCounter from "./components/ClassCounter";
 import Counter from "./components/Counter";
+import "./styles/app.css";
 
 function App() {
   const [value, setValue] = useState("Input text");
