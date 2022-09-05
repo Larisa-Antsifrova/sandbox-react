@@ -34,6 +34,8 @@ function App() {
 
   return (
     <div className="App">
+      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Posts</h2>
+
       {posts.map(post => (
         <PostItem post={post} key={post.id} />
       ))}
