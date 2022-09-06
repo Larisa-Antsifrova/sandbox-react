@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PostItem from "./components/PostItem";
+import PostsList from "./components/PostsList";
 import "./styles/app.css";
 
 function App() {
@@ -34,11 +34,7 @@ function App() {
 
   return (
     <div className="App">
-      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Posts</h2>
-
-      {posts.map(post => (
-        <PostItem post={post} key={post.id} />
-      ))}
+      <PostsList title={"List of Tools"} posts={posts} />
     </div>
   );
 }
