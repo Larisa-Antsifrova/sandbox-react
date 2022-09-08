@@ -1,0 +1,17 @@
+.btn {
+  padding: 5px 15px;
+  
+  font-size: 14px;
+  text-transform: uppercase;
+
+  color: teal;
+  background-color: transparent;
+  border: 1px solid teal;
+  border-radius: 4px;
+
+  cursor: pointer;
+}
+
+.btn:hover {
+  box-shadow: 0px 10px 8px -1px rgba(78, 107, 102, 1);
+}
