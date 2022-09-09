@@ -13,7 +13,7 @@ function App() {
         <input type="text" placeholder="Title" />
         <input type="text" placeholder="Description" />
 
-        <ButtonBasic>Add post</ButtonBasic>
+        <ButtonBasic disabled={true}>Add post</ButtonBasic>
       </form>
       <PostsList title="List of Tools" posts={posts} />
     </div>
