@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PostsList from "./components/PostsList";
 import ButtonBasic from "./components/ui/buttons/ButtonBasic";
+import InputBasic from "./components/ui/inputs/InputBasic";
 import { articles } from "./data/posts";
 import "./styles/app.css";
 
@@ -10,8 +11,8 @@ function App() {
   return (
     <div className="App">
       <form>
-        <input type="text" placeholder="Title" />
-        <input type="text" placeholder="Description" />
+        <InputBasic type="text" placeholder="Title" />
+        <InputBasic type="text" placeholder="Description" />
 
         <ButtonBasic disabled={true}>Add post</ButtonBasic>
       </form>
