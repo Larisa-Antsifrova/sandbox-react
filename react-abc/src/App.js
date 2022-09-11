@@ -7,15 +7,39 @@ import "./styles/app.css";
 
 function App() {
   const [posts, setPosts] = useState(articles);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
+  const addNewPost = e => {
+    e.preventDefault();
+
+    console.log("title: ", title);
+    console.log("description: ", description);
+
+    setTitle("");
+    setDescription("");
+  };
 
   return (
     <div className="App">
       <form>
-        <InputBasic type="text" placeholder="Title" />
-        <InputBasic type="text" placeholder="Description" />
+        <InputBasic
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+          type="text"
+          placeholder="Title"
+        />
 
-        <ButtonBasic disabled={true}>Add post</ButtonBasic>
+        <InputBasic
+          value={description}
+          onChange={e => setDescription(e.target.value)}
+          type="text"
+          placeholder="Description"
+        />
+
+        <ButtonBasic onClick={addNewPost}>Add post</ButtonBasic>
       </form>
+
       <PostsList title="List of Tools" posts={posts} />
     </div>
   );
