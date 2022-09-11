@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import PostsList from "./components/PostsList";
 import ButtonBasic from "./components/ui/buttons/ButtonBasic";
 import InputBasic from "./components/ui/inputs/InputBasic";
@@ -8,18 +8,21 @@ import "./styles/app.css";
 function App() {
   const [posts, setPosts] = useState(articles);
   const [title, setTitle] = useState("");
-  // const [description, setDescription] = useState("");
-  const inputRef = useRef();
+  const [description, setDescription] = useState("");
 
   const addNewPost = e => {
     e.preventDefault();
 
-    console.log("title: ", title);
-    // console.log("description: ", description);
-    console.log(inputRef.current.value);
+    const newPost = {
+      id: Date.now(),
+      title,
+      description,
+    };
+
+    setPosts([newPost, ...posts]);
 
     setTitle("");
-    // setDescription("");
+    setDescription("");
   };
 
   return (
@@ -32,14 +35,12 @@ function App() {
           placeholder="Title"
         />
 
-        {/* <InputBasic
+        <InputBasic
           value={description}
           onChange={e => setDescription(e.target.value)}
           type="text"
           placeholder="Description"
-        /> */}
-
-        <InputBasic ref={inputRef} type="text" placeholder="Description" />
+        />
 
         <ButtonBasic onClick={addNewPost}>Add post</ButtonBasic>
       </form>
