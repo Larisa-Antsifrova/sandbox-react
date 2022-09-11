@@ -1,8 +1,8 @@
 import React from "react";
 import classes from "./InputBasic.module.css";
 
-const InputBasic = props => {
-  return <input {...props} className={classes.input} />;
-};
+const InputBasic = React.forwardRef((props, ref) => {
+  return <input {...props} ref={ref} className={classes.input} />;
+});
 
 export default InputBasic;
