@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PostForm from "./components/PostForm";
 import PostsList from "./components/PostsList";
+import SelectBasic from "./components/ui/selects/SelectBasic";
 
 import { articles } from "./data/posts";
 import "./styles/app.css";
@@ -20,7 +21,19 @@ function App() {
     <div className="App">
       <PostForm create={createPost} />
 
-      <PostsList title="List of Tools" posts={posts} remove={removePost} />
+      <SelectBasic
+        defaultValue="Sort by"
+        options={[
+          { value: "title", name: "By title" },
+          { value: "description", name: "By description" },
+        ]}
+      />
+
+      {posts.length ? (
+        <PostsList title="List of Tools" posts={posts} remove={removePost} />
+      ) : (
+        <div>No posts yet!</div>
+      )}
     </div>
   );
 }
