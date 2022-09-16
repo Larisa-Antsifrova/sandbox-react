@@ -8,6 +8,7 @@ import "./styles/app.css";
 
 function App() {
   const [posts, setPosts] = useState(articles);
+  const [selectedSort, setSelectedSort] = useState("");
 
   const createPost = newPost => {
     setPosts([newPost, ...posts]);
@@ -15,6 +16,10 @@ function App() {
 
   const removePost = postId => {
     setPosts(posts.filter(post => post.id !== postId));
+  };
+
+  const sortPosts = sort => {
+    setSelectedSort(sort);
   };
 
   return (
@@ -27,6 +32,8 @@ function App() {
           { value: "title", name: "By title" },
           { value: "description", name: "By description" },
         ]}
+        value={selectedSort}
+        onChange={sortOption => setSelectedSort(sortOption)}
       />
 
       {posts.length ? (
