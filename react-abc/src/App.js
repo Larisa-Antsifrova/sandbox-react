@@ -20,6 +20,8 @@ function App() {
 
   const sortPosts = sort => {
     setSelectedSort(sort);
+
+    setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])));
   };
 
   return (
@@ -33,7 +35,7 @@ function App() {
           { value: "description", name: "By description" },
         ]}
         value={selectedSort}
-        onChange={sortOption => setSelectedSort(sortOption)}
+        onChange={sortPosts}
       />
 
       {posts.length ? (
