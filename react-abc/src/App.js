@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import PostForm from "./components/PostForm";
 import PostsList from "./components/PostsList";
+import InputBasic from "./components/ui/inputs/InputBasic";
 import SelectBasic from "./components/ui/selects/SelectBasic";
 
 import { articles } from "./data/posts";
@@ -9,6 +10,26 @@ import "./styles/app.css";
 function App() {
   const [posts, setPosts] = useState(articles);
   const [selectedSort, setSelectedSort] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const getSortedPosts = () => {
+    console.log("Sorting in progress");
+    if (selectedSort) {
+      return [...posts].sort((a, b) =>
+        a[selectedSort].localeCompare(b[selectedSort]),
+      );
+    }
+
+    return posts;
+  };
+
+  const sortedPosts = useMemo(getSortedPosts, [selectedSort, posts]);
+
+  const sortedAndSearchedPosts = useMemo(() => {
+    return sortedPosts.filter(post =>
+      post.title.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase()),
+    );
+  }, [searchQuery, sortedPosts]);
 
   const createPost = newPost => {
     setPosts([newPost, ...posts]);
@@ -20,13 +41,17 @@ function App() {
 
   const sortPosts = sort => {
     setSelectedSort(sort);
-
-    setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])));
   };
 
   return (
     <div className="App">
       <PostForm create={createPost} />
+
+      <InputBasic
+        value={searchQuery}
+        onChange={e => setSearchQuery(e.target.value)}
+        placeholder="Search..."
+      />
 
       <SelectBasic
         defaultValue="Sort by"
@@ -38,8 +63,12 @@ function App() {
         onChange={sortPosts}
       />
 
-      {posts.length ? (
-        <PostsList title="List of Tools" posts={posts} remove={removePost} />
+      {sortedAndSearchedPosts.length ? (
+        <PostsList
+          title="List of Tools"
+          posts={sortedAndSearchedPosts}
+          remove={removePost}
+        />
       ) : (
         <div>No posts yet!</div>
       )}
