@@ -43,15 +43,11 @@ function App() {
 
       <PostFilter filter={filter} setFilter={setFilter} />
 
-      {sortedAndSearchedPosts.length ? (
-        <PostsList
-          title="List of Tools"
-          posts={sortedAndSearchedPosts}
-          remove={removePost}
-        />
-      ) : (
-        <div>No posts yet!</div>
-      )}
+      <PostsList
+        title="List of Tools"
+        posts={sortedAndSearchedPosts}
+        remove={removePost}
+      />
     </div>
   );
 }
