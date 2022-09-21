@@ -1,5 +1,4 @@
 import React from "react";
-import classes from "./SelectBasic.module.css";
 
 const SelectBasic = ({ options, defaultValue, value, onChange }) => {
   return (
