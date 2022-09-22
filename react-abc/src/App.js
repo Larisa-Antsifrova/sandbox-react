@@ -2,6 +2,8 @@ import React, { useMemo, useState } from "react";
 import PostFilter from "./components/PostFilter";
 import PostForm from "./components/PostForm";
 import PostsList from "./components/PostsList";
+import ButtonBasic from "./components/ui/buttons/ButtonBasic";
+import ModalBasic from "./components/ui/modals/ModalBasic";
 
 import { articles } from "./data/posts";
 import "./styles/app.css";
@@ -9,6 +11,7 @@ import "./styles/app.css";
 function App() {
   const [posts, setPosts] = useState(articles);
   const [filter, setFilter] = useState({ sort: "", query: "" });
+  const [modal, setModal] = useState(false);
 
   const getSortedPosts = () => {
     console.log("Sorting in progress");
@@ -31,6 +34,7 @@ function App() {
 
   const createPost = newPost => {
     setPosts([newPost, ...posts]);
+    setModal(false);
   };
 
   const removePost = postId => {
@@ -39,7 +43,11 @@ function App() {
 
   return (
     <div className="App">
-      <PostForm create={createPost} />
+      <ButtonBasic onClick={() => setModal(true)}>Create Post</ButtonBasic>
+
+      <ModalBasic visible={modal} setVisible={setModal}>
+        <PostForm create={createPost} />
+      </ModalBasic>
 
       <PostFilter filter={filter} setFilter={setFilter} />
 
