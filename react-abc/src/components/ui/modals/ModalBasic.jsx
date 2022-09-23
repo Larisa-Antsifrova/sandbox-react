@@ -9,8 +9,13 @@ const ModalBasic = ({ children, visible, setVisible }) => {
   }
 
   return (
-    <div className={modalClasses.join(" ")}>
-      <div className={classes.modal__content}>{children}</div>
+    <div className={modalClasses.join(" ")} onClick={() => setVisible(false)}>
+      <div
+        className={classes.modal__content}
+        onClick={e => e.stopPropagation()}
+      >
+        {children}
+      </div>
     </div>
   );
 };
