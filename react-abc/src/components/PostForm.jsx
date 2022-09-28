@@ -35,7 +35,7 @@ const PostForm = ({ create }) => {
       />
 
       <InputBasic
-        value={post.description}
+        value={post.body}
         onChange={e => setPost({ ...post, description: e.target.value })}
         type="text"
         placeholder="Description"

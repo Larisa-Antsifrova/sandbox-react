@@ -9,7 +9,7 @@ const PostItem = ({ post, remove }) => {
           <strong>{post.title}</strong>
         </p>
 
-        <p>{post.description}</p>
+        <p>{post.body}</p>
       </div>
 
       <div className="post__btns">
