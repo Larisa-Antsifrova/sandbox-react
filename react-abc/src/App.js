@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PostFilter from "./components/PostFilter";
 import PostForm from "./components/PostForm";
@@ -7,6 +6,7 @@ import ButtonBasic from "./components/ui/buttons/ButtonBasic";
 import ModalBasic from "./components/ui/modals/ModalBasic";
 
 import { useSortedAndFilteredPostsPosts } from "./hooks/usePosts";
+import { PostService } from "./services/PostService";
 import "./styles/app.css";
 
 function App() {
@@ -20,11 +20,9 @@ function App() {
   );
 
   const fetchPosts = async () => {
-    const { data } = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts",
-    );
+    const posts = await PostService.getAll();
 
-    setPosts(data);
+    setPosts(posts);
   };
 
   useEffect(() => {
