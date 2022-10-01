@@ -13,6 +13,7 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [filter, setFilter] = useState({ sort: "", query: "" });
   const [modal, setModal] = useState(false);
+  const [isPostListLoading, setIsPostListLoading] = useState(false);
   const sortedAndSearchedPosts = useSortedAndFilteredPostsPosts(
     posts,
     filter.sort,
@@ -20,9 +21,12 @@ function App() {
   );
 
   const fetchPosts = async () => {
-    const posts = await PostService.getAll();
+    setIsPostListLoading(true);
 
+    const posts = await PostService.getAll();
     setPosts(posts);
+
+    setIsPostListLoading(false);
   };
 
   useEffect(() => {
@@ -49,11 +53,15 @@ function App() {
 
       <PostFilter filter={filter} setFilter={setFilter} />
 
-      <PostsList
-        title="List of Tools"
-        posts={sortedAndSearchedPosts}
-        remove={removePost}
-      />
+      {isPostListLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <PostsList
+          title="List of Tools"
+          posts={sortedAndSearchedPosts}
+          remove={removePost}
+        />
+      )}
     </div>
   );
 }
