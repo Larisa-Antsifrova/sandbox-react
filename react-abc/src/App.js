@@ -4,6 +4,7 @@ import PostForm from "./components/PostForm";
 import PostsList from "./components/PostsList";
 import ButtonBasic from "./components/ui/buttons/ButtonBasic";
 import ModalBasic from "./components/ui/modals/ModalBasic";
+import LoaderBasic from "./components/ui/loaders/LoaderBasic";
 
 import { useSortedAndFilteredPostsPosts } from "./hooks/usePosts";
 import { PostService } from "./services/PostService";
@@ -54,7 +55,7 @@ function App() {
       <PostFilter filter={filter} setFilter={setFilter} />
 
       {isPostListLoading ? (
-        <p>Loading...</p>
+        <LoaderBasic />
       ) : (
         <PostsList
           title="List of Tools"

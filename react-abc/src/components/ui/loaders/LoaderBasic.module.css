@@ -1,0 +1,7 @@
+.loader {
+  height: 100px;
+  width: 100px;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 3px dashed teal;
+}
