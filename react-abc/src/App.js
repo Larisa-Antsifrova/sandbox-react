@@ -9,26 +9,21 @@ import LoaderBasic from "./components/ui/loaders/LoaderBasic";
 import { useSortedAndFilteredPostsPosts } from "./hooks/usePosts";
 import { PostService } from "./services/PostService";
 import "./styles/app.css";
+import { useFetching } from "./hooks/useFetching";
 
 function App() {
   const [posts, setPosts] = useState([]);
   const [filter, setFilter] = useState({ sort: "", query: "" });
   const [modal, setModal] = useState(false);
-  const [isPostListLoading, setIsPostListLoading] = useState(false);
   const sortedAndSearchedPosts = useSortedAndFilteredPostsPosts(
     posts,
     filter.sort,
     filter.query,
   );
-
-  const fetchPosts = async () => {
-    setIsPostListLoading(true);
-
+  const [fetchPosts, isPostListLoading, postError] = useFetching(async () => {
     const posts = await PostService.getAll();
     setPosts(posts);
-
-    setIsPostListLoading(false);
-  };
+  });
 
   useEffect(() => {
     fetchPosts();
@@ -53,6 +48,8 @@ function App() {
       </ModalBasic>
 
       <PostFilter filter={filter} setFilter={setFilter} />
+
+      {postError && <h2>Error. Try again.</h2>}
 
       {isPostListLoading ? (
         <LoaderBasic />
