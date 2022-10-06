@@ -21,8 +21,8 @@ function App() {
     filter.query,
   );
   const [fetchPosts, isPostListLoading, postError] = useFetching(async () => {
-    const posts = await PostService.getAll();
-    setPosts(posts);
+    const { data } = await PostService.getAll();
+    setPosts(data);
   });
 
   useEffect(() => {
