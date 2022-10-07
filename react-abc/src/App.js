@@ -15,14 +15,24 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [filter, setFilter] = useState({ sort: "", query: "" });
   const [modal, setModal] = useState(false);
+  const [totalCount, setTotalCount] = useState(0);
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
+
   const sortedAndSearchedPosts = useSortedAndFilteredPostsPosts(
     posts,
     filter.sort,
     filter.query,
   );
   const [fetchPosts, isPostListLoading, postError] = useFetching(async () => {
-    const { data } = await PostService.getAll();
-    setPosts(data);
+    const response = await PostService.getAll(limit, page);
+
+    setPosts(response.data);
+    console.log(
+      'response.headers["x-total-count"]',
+      response.headers["x-total-count"],
+    );
+    setTotalCount(response.headers["x-total-count"]);
   });
 
   useEffect(() => {
