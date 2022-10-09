@@ -20,6 +20,14 @@ function App() {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
 
+  let pagesArray = [];
+
+  for (let index = 0; index < totalPages; index++) {
+    pagesArray.push(index + 1);
+  }
+
+  console.log("pagesArray: ", pagesArray);
+
   const sortedAndSearchedPosts = useSortedAndFilteredPostsPosts(
     posts,
     filter.sort,
