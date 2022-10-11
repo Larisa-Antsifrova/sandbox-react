@@ -10,7 +10,7 @@ import { useSortedAndFilteredPostsPosts } from "./hooks/usePosts";
 import { PostService } from "./services/PostService";
 import "./styles/app.css";
 import { useFetching } from "./hooks/useFetching";
-import { getPageCount } from "./utils/pages";
+import {getPageCount, getPagesArray} from "./utils/pages";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -20,13 +20,7 @@ function App() {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
 
-  let pagesArray = [];
-
-  for (let index = 0; index < totalPages; index++) {
-    pagesArray.push(index + 1);
-  }
-
-  console.log("pagesArray: ", pagesArray);
+  const pagesArray = getPagesArray(totalPages);
 
   const sortedAndSearchedPosts = useSortedAndFilteredPostsPosts(
     posts,
