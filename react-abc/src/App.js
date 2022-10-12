@@ -72,6 +72,13 @@ function App() {
           remove={removePost}
         />
       )}
+
+      <div className="page__wrapper">
+        {pagesArray.map(page => (
+            <button className="page">{page}</button>
+        ))}
+      </div>
+
     </div>
   );
 }
