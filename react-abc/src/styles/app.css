@@ -67,4 +67,16 @@
   background-color: transparent;
   color: teal;
   cursor: pointer;
+  transition: scale 250ms linear;
+}
+
+.page:hover {
+  scale: 1.1;
+  transition: scale 250ms linear;
+}
+
+.page__current {
+  border: 2px solid orange;
+  font-weight: bold;
+
 }
