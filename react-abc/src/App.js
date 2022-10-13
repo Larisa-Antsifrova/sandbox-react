@@ -74,8 +74,8 @@ function App() {
       )}
 
       <div className="page__wrapper">
-        {pagesArray.map(page => (
-            <button className="page">{page}</button>
+        {pagesArray.map(p => (
+            <button className={page === p ? 'page page__current' : 'page'} key={p}>{p}</button>
         ))}
       </div>
 
