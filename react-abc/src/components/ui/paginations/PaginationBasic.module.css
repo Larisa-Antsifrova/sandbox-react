@@ -1,0 +1,28 @@
+.page__wrapper {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.page {
+    width:40px;
+    aspect-ratio: 1;
+    padding: 10px;
+    margin-right: 8px;
+    border: 1px solid teal;
+    border-radius: 2px;
+    background-color: transparent;
+    color: teal;
+    cursor: pointer;
+    transition: scale 250ms linear;
+}
+
+.page:hover {
+    scale: 1.1;
+    transition: scale 250ms linear;
+}
+
+.page__current {
+    border: 2px solid orange;
+    font-weight: bold;
+}
