@@ -33,6 +33,10 @@
   color: #000000;
 }
 
+.post__btns {
+  display: flex;
+}
+
 .post-enter {
   transform: translateX(-350px);
 }
