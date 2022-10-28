@@ -1,7 +1,15 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 function PostDetailsPage() {
-  return <h1> Post Details </h1>;
+  const { id } = useParams();
+
+  return (
+    <h1>
+      {" "}
+      Post Details <span>{id}</span>{" "}
+    </h1>
+  );
 }
 
 export default PostDetailsPage;
