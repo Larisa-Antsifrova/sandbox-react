@@ -8,6 +8,7 @@ function PostDetailsPage() {
   const { id } = useParams();
 
   const [post, setPost] = useState({});
+  const [comments, setComments] = useState([]);
 
   const [fetchPostById, isLoading, error] = useFetching(async id => {
     const { data } = await PostService.getById(id);
@@ -15,8 +16,15 @@ function PostDetailsPage() {
     setPost(data);
   });
 
+  const [fetchComments, isLoadingComments, errorComments] = useFetching(async id => {
+    const { data } = await PostService.getCommentsByPostId(id);
+
+    setComments(data);
+  });
+
   useEffect(() => {
     fetchPostById(id);
+    fetchComments(id)
   }, []);
 
   return (
@@ -34,6 +42,22 @@ function PostDetailsPage() {
             <b>Post title: </b> {post.title}
           </p>
         </div>
+      )}
+
+      <h2>Comments</h2>
+
+      {isLoadingComments ? (
+          <LoaderBasic />
+      ) : (
+          <div>
+            {comments.map(comment=>
+            <div key={comment.id} style={{marginTop: '15px'}}>
+              <h5>{comment.email}</h5>
+
+              <p>{comment.body}</p>
+            </div>
+            )}
+          </div>
       )}
     </Fragment>
   );
