@@ -1,16 +1,14 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import AboutPage from "../pages/AboutPage";
 import HomePage from "../pages/HomePage";
-import PostDetailsPage from "../pages/PostDetailsPage";
-import PostsPage from "../pages/PostsPage";
+
+import {router} from "../router";
 
 const AppRouter = () => {
   return (
     <Routes>
-      <Route path="/about" element={<AboutPage />} />
-      <Route path="/posts" exact element={<PostsPage />} />
-      <Route path="/posts/:id" exact element={<PostDetailsPage />} />
+        { router.map( route =>
+        (<Route key={route.path} path={route.path} element={route.component} exact={route.exact}/>))}
       <Route path="/" element={<HomePage />} />
       <Route path="*" element={<Navigate replace to="/" />} />
     </Routes>
