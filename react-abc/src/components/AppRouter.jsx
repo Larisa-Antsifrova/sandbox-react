@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { AuthContext } from "../context";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 
 import { privateRoutes, publicRoutes } from "../router";
 
 const AppRouter = () => {
-  const isAuthorized = false;
+  const { isAuth, setIsAuth } = useContext(AuthContext);
 
-  return isAuthorized ? (
+  return isAuth ? (
     <Routes>
       {privateRoutes.map(route => (
         <Route

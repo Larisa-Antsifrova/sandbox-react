@@ -1,19 +1,25 @@
-import React from "react";
-import "./styles/app.css";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import AboutPage from "./pages/AboutPage";
-import PostsPage from "./pages/PostsPage";
-import NavBarBasic from "./components/ui/navbars/NavBarBasic";
-import HomePage from "./pages/HomePage";
+import React, { useState } from "react";
+import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./components/AppRouter";
+import NavBarBasic from "./components/ui/navbars/NavBarBasic";
+import { AuthContext } from "./context";
+import "./styles/app.css";
 
 function App() {
+  const [isAuth, setIsAuth] = useState(false);
   return (
-    <BrowserRouter>
-      <NavBarBasic />
+    <AuthContext.Provider
+      value={{
+        isAuth,
+        setIsAuth,
+      }}
+    >
+      <BrowserRouter>
+        <NavBarBasic />
 
-      <AppRouter />
-    </BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
+    </AuthContext.Provider>
   );
 }
 
