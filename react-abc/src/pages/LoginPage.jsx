@@ -1,20 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 import InputBasic from "../components/ui/inputs/InputBasic";
 import ButtonBasic from "../components/ui/buttons/ButtonBasic";
+import { AuthContext } from "../context";
 
 function LoginPage() {
-    return <div>
-        <h1> Login </h1>
+  const { isAuth, setIsAuth } = useContext(AuthContext);
 
-        <form action="">
-            <InputBasic type="text" placeholder={'Enter login'}/>
-            <InputBasic type="password" placeholder={'Enter password'}/>
+  const login = event => {
+    event.preventDefault();
+    setIsAuth(true);
+  };
 
-            <ButtonBasic>
-                Submit
-            </ButtonBasic>
-        </form>
+  return (
+    <div>
+      <h1> Login </h1>
+
+      <form onSubmit={login}>
+        <InputBasic type="text" placeholder={"Enter login"} />
+        <InputBasic type="password" placeholder={"Enter password"} />
+
+        <ButtonBasic>Submit</ButtonBasic>
+      </form>
     </div>
+  );
 }
 
 export default LoginPage;
