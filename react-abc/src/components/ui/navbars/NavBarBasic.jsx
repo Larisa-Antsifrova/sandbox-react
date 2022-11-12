@@ -1,16 +1,28 @@
-import React from "react";
+import React, { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../context";
+import ButtonBasic from "../buttons/ButtonBasic";
 
 const NavBarBasic = () => {
-    return (
-        <div className="navbar">
+  const { isAuth, setIsAuth } = useContext(AuthContext);
 
-            <div className="navbar__links">
-                <Link to="/about">About</Link>
-                <Link to="/posts">Posts</Link>
-            </div>
-        </div>
-    );
+  const logout = () => {
+    setIsAuth(false);
+  };
+
+  return (
+    <div className="navbar">
+      {isAuth && (
+        <Fragment>
+          <ButtonBasic onClick={logout}>Log out</ButtonBasic>
+          <div className="navbar__links">
+            <Link to="/about">About</Link>
+            <Link to="/posts">Posts</Link>
+          </div>
+        </Fragment>
+      )}
+    </div>
+  );
 };
 
 export default NavBarBasic;
