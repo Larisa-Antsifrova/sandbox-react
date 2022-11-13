@@ -9,6 +9,7 @@ function LoginPage() {
   const login = event => {
     event.preventDefault();
     setIsAuth(true);
+    localStorage.setItem("auth", JSON.stringify(true));
   };
 
   return (
