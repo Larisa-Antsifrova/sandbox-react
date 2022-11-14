@@ -4,11 +4,12 @@ import ButtonBasic from "../components/ui/buttons/ButtonBasic";
 import { AuthContext } from "../context";
 
 function LoginPage() {
-  const { isAuth, setIsAuth } = useContext(AuthContext);
+  const { setIsAuth, setIsLoading } = useContext(AuthContext);
 
   const login = event => {
     event.preventDefault();
     setIsAuth(true);
+    setIsLoading(false);
     localStorage.setItem("auth", JSON.stringify(true));
   };
 

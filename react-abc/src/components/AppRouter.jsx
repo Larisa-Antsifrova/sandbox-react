@@ -5,9 +5,14 @@ import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 
 import { privateRoutes, publicRoutes } from "../router";
+import LoaderBasic from "./ui/loaders/LoaderBasic";
 
 const AppRouter = () => {
-  const { isAuth, setIsAuth } = useContext(AuthContext);
+  const { isAuth, isLoading } = useContext(AuthContext);
+
+  if (isLoading) {
+    return <LoaderBasic />;
+  }
 
   return isAuth ? (
     <Routes>
