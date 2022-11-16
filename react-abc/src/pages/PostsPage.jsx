@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import PostFilter from "../components/PostFilter";
 import PostForm from "../components/PostForm";
 import PostsList from "../components/PostsList";
@@ -6,85 +6,81 @@ import ButtonBasic from "../components/ui/buttons/ButtonBasic";
 import ModalBasic from "../components/ui/modals/ModalBasic";
 import LoaderBasic from "../components/ui/loaders/LoaderBasic";
 
-import {useSortedAndFilteredPostsPosts} from "../hooks/usePosts";
-import {PostService} from "../services/PostService";
+import { useSortedAndFilteredPostsPosts } from "../hooks/usePosts";
+import { PostService } from "../services/PostService";
 import "../styles/app.css";
-import {useFetching} from "../hooks/useFetching";
-import {getPageCount} from "../utils/pages";
+import { useFetching } from "../hooks/useFetching";
+import { getPageCount } from "../utils/pages";
 import PaginationBasic from "../components/ui/paginations/PaginationBasic";
 
 function PostsPage() {
-    const [posts, setPosts] = useState([]);
-    const [filter, setFilter] = useState({ sort: "", query: "" });
-    const [modal, setModal] = useState(false);
-    const [totalPages, setTotalPages] = useState(0);
-    const [limit, _setLimit] = useState(10);
-    const [page, setPage] = useState(1);
+  const [posts, setPosts] = useState([]);
+  const [filter, setFilter] = useState({ sort: "", query: "" });
+  const [modal, setModal] = useState(false);
+  const [totalPages, setTotalPages] = useState(0);
+  const [limit, _setLimit] = useState(10);
+  const [page, setPage] = useState(1);
 
+  const sortedAndSearchedPosts = useSortedAndFilteredPostsPosts(
+    posts,
+    filter.sort,
+    filter.query,
+  );
+  const [fetchPosts, isPostListLoading, postError] = useFetching(async () => {
+    const response = await PostService.getAll(limit, page);
 
+    setPosts(response.data);
 
-    const sortedAndSearchedPosts = useSortedAndFilteredPostsPosts(
-        posts,
-        filter.sort,
-        filter.query,
-    );
-    const [fetchPosts, isPostListLoading, postError] = useFetching(async () => {
-        const response = await PostService.getAll(limit, page);
+    const totalCount = response.headers["x-total-count"];
 
-        setPosts(response.data);
+    setTotalPages(getPageCount(totalCount, limit));
+  });
 
-        const totalCount = response.headers["x-total-count"];
+  useEffect(() => {
+    fetchPosts();
+  }, [page]);
 
-        setTotalPages(getPageCount(totalCount, limit));
-    });
+  const changePage = page => {
+    setPage(page);
+  };
 
-    useEffect(() => {
-        fetchPosts();
-    }, [page]);
+  const createPost = newPost => {
+    setPosts([newPost, ...posts]);
+    setModal(false);
+  };
 
-    const changePage = (page) => {
-        setPage(page)
-    }
+  const removePost = postId => {
+    setPosts(posts.filter(post => post.id !== postId));
+  };
 
-    const createPost = newPost => {
-        setPosts([newPost, ...posts]);
-        setModal(false);
-    };
+  return (
+    <div className="App">
+      <ButtonBasic onClick={fetchPosts}>Fetch Post</ButtonBasic>
+      <ButtonBasic onClick={() => setModal(true)}>Create Post</ButtonBasic>
 
-    const removePost = postId => {
-        setPosts(posts.filter(post => post.id !== postId));
-    };
+      <ModalBasic visible={modal} setVisible={setModal}>
+        <PostForm create={createPost} />
+      </ModalBasic>
 
-    return (
-        <div className="App">
-            <ButtonBasic onClick={fetchPosts}>Fetch Post</ButtonBasic>
-            <ButtonBasic onClick={() => setModal(true)}>Create Post</ButtonBasic>
+      <PostFilter filter={filter} setFilter={setFilter} />
 
-            <ModalBasic visible={modal} setVisible={setModal}>
-                <PostForm create={createPost} />
-            </ModalBasic>
+      {postError && <h2>Error. Try again.</h2>}
 
-            <PostFilter filter={filter} setFilter={setFilter} />
+      {isPostListLoading && <LoaderBasic />}
 
-            {postError && <h2>Error. Try again.</h2>}
+      <PostsList
+        title="List of Tools"
+        posts={sortedAndSearchedPosts}
+        remove={removePost}
+      />
 
-            {isPostListLoading ? (
-                <LoaderBasic />
-            ) : (
-                <PostsList
-                    title="List of Tools"
-                    posts={sortedAndSearchedPosts}
-                    remove={removePost}
-                />
-            )}
-
-            <PaginationBasic
-                totalPages={totalPages}
-                page={page}
-                changePage={changePage}/>
-
-        </div>
-    );
+      <PaginationBasic
+        totalPages={totalPages}
+        page={page}
+        changePage={changePage}
+      />
+    </div>
+  );
 }
 
 export default PostsPage;
