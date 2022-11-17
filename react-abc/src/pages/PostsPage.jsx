@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PostFilter from "../components/PostFilter";
 import PostForm from "../components/PostForm";
 import PostsList from "../components/PostsList";
@@ -20,6 +20,7 @@ function PostsPage() {
   const [totalPages, setTotalPages] = useState(0);
   const [limit, _setLimit] = useState(10);
   const [page, setPage] = useState(1);
+  const lastElement = useRef();
 
   const sortedAndSearchedPosts = useSortedAndFilteredPostsPosts(
     posts,
@@ -29,16 +30,18 @@ function PostsPage() {
   const [fetchPosts, isPostListLoading, postError] = useFetching(async () => {
     const response = await PostService.getAll(limit, page);
 
-    setPosts(response.data);
+    setPosts([...posts, ...response.data]);
 
     const totalCount = response.headers["x-total-count"];
 
     setTotalPages(getPageCount(totalCount, limit));
   });
 
+  useEffect(() => {}, []);
+
   useEffect(() => {
     fetchPosts();
-  }, [page]);
+  }, [fetchPosts, page]);
 
   const changePage = page => {
     setPage(page);
