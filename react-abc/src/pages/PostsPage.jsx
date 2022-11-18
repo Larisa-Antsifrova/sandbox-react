@@ -77,6 +77,8 @@ function PostsPage() {
         remove={removePost}
       />
 
+      <div style={{ height: "20", backgroundColor: "teal" }}></div>
+
       <PaginationBasic
         totalPages={totalPages}
         page={page}
