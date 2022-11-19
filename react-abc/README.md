@@ -7,5 +7,6 @@
 - useCallback()
 - useContext()
 
-## Roter
-- [Documentation](https://v5.reactrouter.com/web/guides/quick-start)
+## Documentation
+- [React](https://reactjs.org/)
+- [Router](https://v5.reactrouter.com/web/guides/quick-start)
