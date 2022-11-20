@@ -21,6 +21,7 @@ function PostsPage() {
   const [limit, _setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const lastElement = useRef();
+  const observer = useRef();
 
   const sortedAndSearchedPosts = useSortedAndFilteredPostsPosts(
     posts,
@@ -37,11 +38,30 @@ function PostsPage() {
     setTotalPages(getPageCount(totalCount, limit));
   });
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (isPostListLoading) {
+      return;
+    }
+
+    if (observer.current) {
+      observer.current.disconnect();
+    }
+
+    const callback = (entries, _observer) => {
+      if (entries[0].isIntersecting && page < totalPages) {
+        console.log("Page: ", page);
+        setPage(page + 1);
+      }
+    };
+
+    observer.current = new IntersectionObserver(callback);
+
+    observer.current.observe(lastElement.current);
+  }, [isPostListLoading]);
 
   useEffect(() => {
     fetchPosts();
-  }, [fetchPosts, page]);
+  }, [page]);
 
   const changePage = page => {
     setPage(page);
@@ -77,7 +97,10 @@ function PostsPage() {
         remove={removePost}
       />
 
-      <div style={{ height: "20", backgroundColor: "teal" }}></div>
+      <div
+        ref={lastElement}
+        style={{ height: "20px", backgroundColor: "teal" }}
+      ></div>
 
       <PaginationBasic
         totalPages={totalPages}
