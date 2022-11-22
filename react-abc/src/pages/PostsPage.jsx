@@ -3,15 +3,16 @@ import PostFilter from "../components/PostFilter";
 import PostForm from "../components/PostForm";
 import PostsList from "../components/PostsList";
 import ButtonBasic from "../components/ui/buttons/ButtonBasic";
-import ModalBasic from "../components/ui/modals/ModalBasic";
 import LoaderBasic from "../components/ui/loaders/LoaderBasic";
+import ModalBasic from "../components/ui/modals/ModalBasic";
 
+import PaginationBasic from "../components/ui/paginations/PaginationBasic";
+import { useFetching } from "../hooks/useFetching";
+import { useObserver } from "../hooks/useObserver";
 import { useSortedAndFilteredPostsPosts } from "../hooks/usePosts";
 import { PostService } from "../services/PostService";
 import "../styles/app.css";
-import { useFetching } from "../hooks/useFetching";
 import { getPageCount } from "../utils/pages";
-import PaginationBasic from "../components/ui/paginations/PaginationBasic";
 
 function PostsPage() {
   const [posts, setPosts] = useState([]);
@@ -21,7 +22,6 @@ function PostsPage() {
   const [limit, _setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const lastElement = useRef();
-  const observer = useRef();
 
   const sortedAndSearchedPosts = useSortedAndFilteredPostsPosts(
     posts,
@@ -38,26 +38,9 @@ function PostsPage() {
     setTotalPages(getPageCount(totalCount, limit));
   });
 
-  useEffect(() => {
-    if (isPostListLoading) {
-      return;
-    }
-
-    if (observer.current) {
-      observer.current.disconnect();
-    }
-
-    const callback = (entries, _observer) => {
-      if (entries[0].isIntersecting && page < totalPages) {
-        console.log("Page: ", page);
-        setPage(page + 1);
-      }
-    };
-
-    observer.current = new IntersectionObserver(callback);
-
-    observer.current.observe(lastElement.current);
-  }, [isPostListLoading]);
+  useObserver(lastElement, page < totalPages, isPostListLoading, () =>
+    setPage(page + 1),
+  );
 
   useEffect(() => {
     fetchPosts();
