@@ -13,13 +13,14 @@ import { useSortedAndFilteredPostsPosts } from "../hooks/usePosts";
 import { PostService } from "../services/PostService";
 import "../styles/app.css";
 import { getPageCount } from "../utils/pages";
+import SelectBasic from "../components/ui/selects/SelectBasic";
 
 function PostsPage() {
   const [posts, setPosts] = useState([]);
   const [filter, setFilter] = useState({ sort: "", query: "" });
   const [modal, setModal] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
-  const [limit, _setLimit] = useState(10);
+  const [limit, setLimit] = useState(5);
   const [page, setPage] = useState(1);
   const lastElement = useRef();
 
@@ -44,7 +45,7 @@ function PostsPage() {
 
   useEffect(() => {
     fetchPosts();
-  }, [page]);
+  }, [page, limit]);
 
   const changePage = page => {
     setPage(page);
@@ -69,6 +70,19 @@ function PostsPage() {
       </ModalBasic>
 
       <PostFilter filter={filter} setFilter={setFilter} />
+
+        <SelectBasic
+        value={limit}
+        onChange={(value)=>{setLimit(value)}}
+        defaultValue={'Options on the page'}
+        options={[
+            {value: 5, name: '5'},
+            {value: 10, name: '10'},
+            {value: 25, name: '25'},
+            {value: -1, name: 'All'},
+
+        ]}
+        />
 
       {postError && <h2>Error. Try again.</h2>}
 
