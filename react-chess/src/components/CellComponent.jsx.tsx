@@ -2,8 +2,9 @@ import React from 'react'
 
 const CellComponentJsx = () => {
   return (
-    <div>
-      
+    <div
+    className={'cell'}>
+
       </div>
   )
 }
