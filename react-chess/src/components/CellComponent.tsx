@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CellComponentJsx = () => {
+const CellComponent = () => {
   return (
     <div
     className={'cell'}>
@@ -9,4 +9,4 @@ const CellComponentJsx = () => {
   )
 }
 
-export default CellComponentJsx
+export default CellComponent
