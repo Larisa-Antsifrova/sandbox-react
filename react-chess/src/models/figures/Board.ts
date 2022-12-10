@@ -1,4 +1,5 @@
 import { Cell } from './Cell'
+import { Color } from './Color'
 
 export class Board {
   cells: Cell[][] = []
@@ -9,9 +10,9 @@ export class Board {
 
       for (let j = 0; j < 8; j++) {
         if((i + j) % 2 !==0){
-          row.push(new Cell()) // Black cells
+          row.push(new Cell(this, j, i, Color.BLACK, null )) // Black cells
         } else {
-          row.push(new Cell()) // White cells
+          row.push(new Cell(this, j, i, Color.WHITE, null )) // White cells
         }
       }
 
