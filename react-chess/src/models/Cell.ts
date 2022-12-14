@@ -1,5 +1,5 @@
 import { Color } from './Color'
-import { Figure } from './Figure'
+import { Figure } from './figures/Figure'
 import { Board } from './Board'
 
 export class Cell {
