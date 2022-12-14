@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Cell } from '../models/figures/Cell'
+import { Cell } from '../models/Cell'
 
 interface CellProps {
   cell: Cell

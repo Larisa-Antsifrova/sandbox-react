@@ -1,7 +1,7 @@
-import { Color } from './Color'
+import { Color } from '../Color'
 // @ts-ignore
 import logo from '../../assets/black-bishop.png'
-import { Cell } from './Cell'
+import { Cell } from '../Cell'
 
 export enum FigureName {
   FIGURE = 'FIGURE',
@@ -27,6 +27,14 @@ export class Figure {
     this.logo = null
     this.name = FigureName.FIGURE
     this.id = Math.random()
+  }
+
+  canMove(target: Cell): boolean {
+    return true
+  }
+
+  moveFigure(target: Cell): void {
+
   }
 
 }
