@@ -10,6 +10,5 @@ export class Knight extends Figure {
 
     this.logo = color === Color.BLACK ? blackLogo : whiteLogo
     this.name = FigureName.KNIGHT
-    this.name = FigureName.KNIGHT
   }
 }
