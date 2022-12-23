@@ -1,5 +1,6 @@
 import { Cell } from './Cell'
 import { Color } from './Color'
+import { Queen } from './figures/Queen'
 
 export class Board {
   cells: Cell[][] = []
@@ -18,5 +19,15 @@ export class Board {
 
       this.cells.push(row)
     }
+  }
+
+  public getCell(x: number,y: number): Cell {
+    return this.cells[y][x]
+  }
+
+  public addFigures(): void {
+
+    new Queen(Color.WHITE, this.getCell(3,3))
+
   }
 }
