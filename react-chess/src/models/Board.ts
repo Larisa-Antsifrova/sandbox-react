@@ -1,6 +1,7 @@
 import { Cell } from './Cell'
 import { Color } from './Color'
 import { Pawn } from './figures/Pawn'
+import { King } from './figures/King'
 
 export class Board {
   cells: Cell[][] = []
@@ -42,8 +43,13 @@ export class Board {
     }
   }
 
+  private addKings() {
+    new King(Color.WHITE, this.getCell(4, 0))
+    new King(Color.BLACK, this.getCell(4, 7))
+  }
+
   private addBishops() {}
-  private addKings() {}
+
   private addKnights() {}
   private addQueens() {}
   private addRooks() {}
