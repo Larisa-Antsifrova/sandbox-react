@@ -54,7 +54,13 @@ export class Board {
     new Queen(Color.BLACK, this.getCell(3, 7))
   }
 
-  private addBishops() {}
+  private addBishops() {
+    new Queen(Color.BLACK, this.getCell(2, 0))
+    new Queen(Color.BLACK, this.getCell(5, 0))
+
+    new Queen(Color.WHITE, this.getCell(2, 7))
+    new Queen(Color.WHITE, this.getCell(5, 7))
+  }
 
   private addKnights() {}
 
