@@ -4,6 +4,8 @@ import { Pawn } from './figures/Pawn'
 import { King } from './figures/King'
 import { Queen } from './figures/Queen'
 import { Knight } from './figures/Knight'
+import { Rook } from './figures/Rook'
+import { Bishop } from './figures/Bishop'
 
 export class Board {
   cells: Cell[][] = []
@@ -40,27 +42,27 @@ export class Board {
 
   private addPawns() {
     for (let i = 0; i < 8; i++) {
-      new Pawn(Color.WHITE, this.getCell(i, 1))
-      new Pawn(Color.BLACK, this.getCell(i, 6))
+      new Pawn(Color.BLACK, this.getCell(i, 1))
+      new Pawn(Color.WHITE, this.getCell(i, 6))
     }
   }
 
   private addKings() {
-    new King(Color.WHITE, this.getCell(4, 0))
-    new King(Color.BLACK, this.getCell(4, 7))
+    new King(Color.BLACK, this.getCell(4, 0))
+    new King(Color.WHITE, this.getCell(4, 7))
   }
 
   private addQueens() {
-    new Queen(Color.WHITE, this.getCell(3, 0))
-    new Queen(Color.BLACK, this.getCell(3, 7))
+    new Queen(Color.BLACK, this.getCell(3, 0))
+    new Queen(Color.WHITE, this.getCell(3, 7))
   }
 
   private addBishops() {
-    new Queen(Color.BLACK, this.getCell(2, 0))
-    new Queen(Color.BLACK, this.getCell(5, 0))
+    new Bishop(Color.BLACK, this.getCell(2, 0))
+    new Bishop(Color.BLACK, this.getCell(5, 0))
 
-    new Queen(Color.WHITE, this.getCell(2, 7))
-    new Queen(Color.WHITE, this.getCell(5, 7))
+    new Bishop(Color.WHITE, this.getCell(2, 7))
+    new Bishop(Color.WHITE, this.getCell(5, 7))
   }
 
   private addKnights() {
@@ -71,6 +73,11 @@ export class Board {
     new Knight(Color.WHITE, this.getCell(6, 7))
   }
 
-  private addRooks() {}
+  private addRooks() {
+    new Rook(Color.BLACK, this.getCell(0, 0))
+    new Rook(Color.BLACK, this.getCell(7, 0))
 
+    new Rook(Color.WHITE, this.getCell(0, 7))
+    new Rook(Color.WHITE, this.getCell(7, 7))
+  }
 }
