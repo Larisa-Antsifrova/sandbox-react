@@ -11,11 +11,19 @@ interface BoardProps {
 const BoardComponent: FC<BoardProps> = ({board, setBoard}) => {
   const [selectedCell, setSelectedCell] = useState<Cell | null>(null)
 
+  function click(cell: Cell){
+    setSelectedCell(cell)
+  }
+
     return (
         <div className={'board'}>
           {board.cells.map((row, index) =>
               <React.Fragment key={index}>
-                {row.map(cell => <CellComponent cell={cell} key={cell.id} isSelected={cell.x === selectedCell?.x && cell.y === selectedCell?.y}/>)}
+                {row.map(cell => <CellComponent
+                  click={ click }
+                  cell={cell}
+                  key={cell.id}
+                  isSelected={cell.x === selectedCell?.x && cell.y === selectedCell?.y}/>)}
               </React.Fragment>)
           }
         </div>
