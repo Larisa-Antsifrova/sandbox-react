@@ -11,8 +11,10 @@ interface BoardProps {
 const BoardComponent: FC<BoardProps> = ({board, setBoard}) => {
   const [selectedCell, setSelectedCell] = useState<Cell | null>(null)
 
-  function click(cell: Cell){
-    setSelectedCell(cell)
+  function click(cell: Cell): void {
+    if(cell.figure){
+      setSelectedCell(cell)
+    }
   }
 
     return (
