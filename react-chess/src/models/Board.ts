@@ -80,4 +80,12 @@ export class Board {
     new Rook(Color.WHITE, this.getCell(0, 7))
     new Rook(Color.WHITE, this.getCell(7, 7))
   }
+
+  highlightCells(): void {
+// TODO: add implementation
+  }
+
+  getCopyBoard(): Board {
+  // TODO: add implementation
+  }
 }
