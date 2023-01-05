@@ -18,7 +18,7 @@ const BoardComponent: FC<BoardProps> = ({board, setBoard}) => {
   }
 
   function highlightCells(): void {
-    board.highlightCells()
+    board.highlightCells(selectedCell)
 
     updateBoard()
   }

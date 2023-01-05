@@ -81,8 +81,17 @@ export class Board {
     new Rook(Color.WHITE, this.getCell(7, 7))
   }
 
-  highlightCells(): void {
-// TODO: add implementation
+  highlightCells(selectedCell: Cell | null): void {
+    for (let i = 0; i < this.cells.length; i++) {
+      const row = this.cells[i]
+
+      for (let j = 0; j < row.length; j++) {
+        const target = row[j]
+
+        target.available = Boolean(selectedCell?.figure?.canMove(target))
+      }
+      
+    }
   }
 
   getCopyBoard(): Board {
