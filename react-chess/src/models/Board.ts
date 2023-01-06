@@ -81,7 +81,7 @@ export class Board {
     new Rook(Color.WHITE, this.getCell(7, 7))
   }
 
-  highlightCells(selectedCell: Cell | null): void {
+  public highlightCells(selectedCell: Cell | null): void {
     for (let i = 0; i < this.cells.length; i++) {
       const row = this.cells[i]
 
@@ -94,7 +94,11 @@ export class Board {
     }
   }
 
-  getCopyBoard(): Board {
-  // TODO: add implementation
+  public getCopyBoard(): Board {
+    const newBoard = new Board()
+
+    newBoard.cells = this.cells
+
+    return newBoard
   }
 }
