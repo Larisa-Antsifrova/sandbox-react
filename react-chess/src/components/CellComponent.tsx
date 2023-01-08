@@ -13,9 +13,8 @@ const CellComponent: FC<CellProps> = ({cell, isSelected, click}) => {
     <div
       className={['cell', cell.color, isSelected ? 'selected' : ''].join(' ')}
       onClick={()=> click(cell)}
-      style={{background: cell.available && !cell.figure ? 'green': ''}}
     >
-      {cell.available && !cell.figure && <div className={'available'}></div>}
+      {cell.available && !cell.figure && <div className={'available'} style={{background: cell.available && !cell.figure ? 'green': ''}}></div>}
 
       {cell.figure?.logo && <img src={cell.figure.logo} alt={cell.figure.name}/>}
       </div>
