@@ -26,4 +26,8 @@ export class Cell {
     this.available = false
     this.id = Math.random()
   }
+
+  moveFigure(target: Cell){
+
+  }
 }
