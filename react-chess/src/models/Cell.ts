@@ -27,6 +27,18 @@ export class Cell {
     this.id = Math.random()
   }
 
+  isEmptyVertical(target: Cell): boolean {
+    return true
+  }
+
+  isEmptyHorizontal(target: Cell): boolean {
+    return true
+  }
+
+  isEmptyDiagonal(target: Cell): boolean {
+    return true
+  }
+
   moveFigure(target: Cell){
    if(this.figure?.canMove(target)){
      this.figure?.moveFigure(target)
