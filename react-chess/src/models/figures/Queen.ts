@@ -19,6 +19,10 @@ export class Queen extends Figure {
       return false
     }
 
-    return true
+    if(this.cell.isEmptyVertical(target)){
+      return true
+    }
+
+    return false
   }
 }
