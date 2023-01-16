@@ -56,11 +56,17 @@ export class Cell {
     return true
   }
 
+  setFigure(figure: Figure): void {
+    this.figure = figure
+    this.figure.cell = this
+  }
+
   moveFigure(target: Cell){
    if(this.figure?.canMove(target)){
      this.figure?.moveFigure(target)
 
-     target.figure = this.figure
+     target.setFigure(this.figure)
+
      this.figure = null
    }
   }
