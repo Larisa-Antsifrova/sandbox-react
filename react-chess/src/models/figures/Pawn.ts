@@ -21,6 +21,14 @@ export class Pawn extends Figure {
       return false
     }
 
+    const direction = this.cell.figure?.color === Color.BLACK ? 1 : -1
+
     return true
+  }
+
+  moveFigure(target: Cell) {
+    super.moveFigure(target)
+
+    this.isFirstStep = false
   }
 }
