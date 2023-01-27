@@ -92,4 +92,12 @@ export class Cell {
      this.figure = null
    }
   }
+
+  isEnemy(target: Cell): boolean {
+    if (target.figure){
+      return this.figure?.color !== target.figure.color
+    }
+
+    return false
+  }
 }
