@@ -26,6 +26,10 @@ function App() {
     setBoard(newBoard)
   }
 
+  function swapPlayer(): void {
+    setCurrentPlayer(currentPlayer?.color === Color.WHITE ? blackPlayer: whitePlayer)
+  }
+
   return (
     <div className="app">
      <h1>Chess app</h1>
