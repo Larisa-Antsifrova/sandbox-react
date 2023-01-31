@@ -34,7 +34,12 @@ function App() {
     <div className="app">
      <h1>Chess app</h1>
 
-      <BoardComponent board={board} setBoard={setBoard}/>
+      <BoardComponent
+        board={board}
+        setBoard={setBoard}
+        currentPlayer={currentPlayer}
+        swapPlayer={swapPlayer}
+      />
     </div>
   );
 }
