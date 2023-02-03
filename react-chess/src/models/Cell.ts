@@ -88,6 +88,10 @@ export class Cell {
    if(this.figure?.canMove(target)){
      this.figure?.moveFigure(target)
 
+     if(target.figure){
+       this.addLostFigure(target.figure)
+     }
+
      target.figure = this.figure
      this.figure = null
    }
@@ -99,5 +103,11 @@ export class Cell {
     }
 
     return false
+  }
+
+   addLostFigure(figure: Figure) {
+    figure.color === Color.WHITE
+      ? this.board.lostBlackFigures.push(figure)
+      : this.board.lostWhiteFigures.push(figure)
   }
 }
