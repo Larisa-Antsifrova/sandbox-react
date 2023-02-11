@@ -1,8 +1,18 @@
-import React from 'react'
+import React, {FC} from 'react'
+import { Player } from '../models/Player'
 
-const Timer = () => {
+interface TimerProps {
+currentPlayer: Player
+  restart: () => void
+}
+
+const Timer: FC<TimerProps> = ({currentPlayer, restart}) => {
   return (
-    <div></div>
+    <div>
+      <button onClick={restart}>
+        Restart game
+      </button>
+    </div>
   )
 }
 
