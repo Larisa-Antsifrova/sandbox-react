@@ -10,6 +10,18 @@ const Timer: FC<TimerProps> = ({currentPlayer, restart}) => {
   const [whiteTime, setWhiteTime] = useState(300)
   const [blackTime, setBlackTime] = useState(300)
 
+  function startTimer(): void {}
+
+  function decrementWhiteTimer(): void {
+    setWhiteTime(prevState => prevState - 1)
+  }
+
+  function decrementBlackTimer(): void {
+    setBlackTime(prevState => prevState - 1)
+  }
+
+
+
   return (
     <div>
       <button onClick={restart}>
