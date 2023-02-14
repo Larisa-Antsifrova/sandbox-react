@@ -1,5 +1,7 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import { Player } from '../models/Player'
+import { clearInterval } from 'timers'
+import { Color } from '../models/Color'
 
 interface TimerProps {
 currentPlayer: Player
@@ -10,7 +12,21 @@ const Timer: FC<TimerProps> = ({currentPlayer, restart}) => {
   const [whiteTime, setWhiteTime] = useState(300)
   const [blackTime, setBlackTime] = useState(300)
 
-  function startTimer(): void {}
+  const timer = useRef<null|ReturnType<typeof setInterval>>(null)
+
+  useEffect(()=>{
+    startTimer()
+  },[currentPlayer])
+
+  function startTimer(): void {
+    if(timer.current){
+      clearInterval(timer.current)
+    }
+
+    const callback = currentPlayer.color === Color.WHITE ? decrementWhiteTimer : decrementBlackTimer
+
+    timer.current = setInterval(callback, 1000)
+  }
 
   function decrementWhiteTimer(): void {
     setWhiteTime(prevState => prevState - 1)
