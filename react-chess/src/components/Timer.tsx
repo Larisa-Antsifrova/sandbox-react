@@ -4,7 +4,7 @@ import { clearInterval } from 'timers'
 import { Color } from '../models/Color'
 
 interface TimerProps {
-currentPlayer: Player
+currentPlayer: Player | null
   restart: () => void
 }
 
@@ -23,7 +23,7 @@ const Timer: FC<TimerProps> = ({currentPlayer, restart}) => {
       clearInterval(timer.current)
     }
 
-    const callback = currentPlayer.color === Color.WHITE ? decrementWhiteTimer : decrementBlackTimer
+    const callback = currentPlayer?.color === Color.WHITE ? decrementWhiteTimer : decrementBlackTimer
 
     timer.current = setInterval(callback, 1000)
   }
