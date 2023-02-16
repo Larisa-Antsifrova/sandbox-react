@@ -9,8 +9,9 @@ currentPlayer: Player | null
 }
 
 const Timer: FC<TimerProps> = ({currentPlayer, restart}) => {
-  const [whiteTime, setWhiteTime] = useState(300)
-  const [blackTime, setBlackTime] = useState(300)
+  const defaultGameTime = 300
+  const [whiteTime, setWhiteTime] = useState(defaultGameTime)
+  const [blackTime, setBlackTime] = useState(defaultGameTime)
 
   const timer = useRef<null|ReturnType<typeof setInterval>>(null)
 
@@ -36,11 +37,17 @@ const Timer: FC<TimerProps> = ({currentPlayer, restart}) => {
     setBlackTime(prevState => prevState - 1)
   }
 
+  function handleRestart(): void {
+    setWhiteTime(defaultGameTime)
+    setBlackTime(defaultGameTime)
+    restart()
+  }
+
 
 
   return (
     <div>
-      <button onClick={restart}>
+      <button onClick={handleRestart}>
         Restart game
       </button>
 
