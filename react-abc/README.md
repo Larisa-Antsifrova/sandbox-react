@@ -19,3 +19,4 @@
 
 - [React](https://reactjs.org/)
 - [Router](https://v5.reactrouter.com/web/guides/quick-start)
+- [Tutorial](https://www.youtube.com/watch?v=GNrdg3PzpJQ)
