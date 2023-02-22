@@ -10,6 +10,8 @@ function App() {
      <h2>React Hooks</h2>
 
         <input type="text" value={value} onChange={onChange}/>
+
+        <button onClick={()=>console.log(value)}>Click</button>
     </div>
   );
 }
