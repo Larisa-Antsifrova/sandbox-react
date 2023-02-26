@@ -1,5 +1,6 @@
 import './App.css';
 import useInput from "./hooks/useInput";
+import Hover from "./components/Hover";
 
 function App() {
     const username = useInput('')
@@ -13,6 +14,8 @@ function App() {
         <input type="text" placeholder='password'  {...password}/>
 
         <button onClick={()=>console.log(username.value, password.value)}>Click</button>
+
+        <Hover/>
     </div>
   );
 }
