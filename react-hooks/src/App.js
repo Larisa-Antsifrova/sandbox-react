@@ -7,6 +7,12 @@ function App() {
     const username = useInput('')
     const password = useInput('')
 
+    function searchTodo (query){
+        fetch(`https://jsonplaceholder.typicode.com/todos?query=${query}`)
+            .then(response => response.json())
+            .then(result => console.log(result))
+    }
+
   return (
     <div>
         <section className='demo-section'>

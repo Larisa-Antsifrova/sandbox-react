@@ -17,8 +17,6 @@ const List = () => {
             .then(result => setTodos(prevState => [...prevState, ...result]))
 
         setPage(prevState => prevState + 1)
-
-
     }
 
     useEffect(()=>{
