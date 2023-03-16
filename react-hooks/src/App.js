@@ -2,10 +2,13 @@ import './App.css';
 import useInput from "./hooks/useInput";
 import Hover from "./components/Hover";
 import List from './components/List'
+import {useState} from "react";
 
 function App() {
     const username = useInput('')
     const password = useInput('')
+
+    const [value, setValue] = useState('')
 
     function searchTodo (query){
         fetch(`https://jsonplaceholder.typicode.com/todos?query=${query}`)
@@ -15,6 +18,10 @@ function App() {
 
   return (
     <div>
+        <section>
+            <input type="text" placeholder='search' value={value}/>
+        </section>
+
         <section className='demo-section'>
             <List/>
         </section>
