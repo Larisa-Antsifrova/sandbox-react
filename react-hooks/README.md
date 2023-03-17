@@ -7,3 +7,4 @@
 - useHover
 - useInput
 - useScroll
+- useDebounce
