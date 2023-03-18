@@ -8,3 +8,4 @@
 - useInput
 - useScroll
 - useDebounce
+- useRequest
