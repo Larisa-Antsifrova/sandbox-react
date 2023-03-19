@@ -16,10 +16,16 @@ function App() {
             .then(result => console.log(result))
     }
 
+    const onChange = (event) => {
+        setValue(event.target.value)
+
+        searchTodo(event.target.value)
+    }
+
   return (
     <div>
         <section>
-            <input type="text" placeholder='search' value={value}/>
+            <input type="text" placeholder='search' value={value} onChange={onChange}/>
         </section>
 
         <section className='demo-section'>
