@@ -2,7 +2,7 @@ import './App.css';
 import useInput from "./hooks/useInput";
 import Hover from "./components/Hover";
 import List from './components/List'
-import {useState} from "react";
+import React, {useState} from "react";
 import useDebounce from "./hooks/useDebounce";
 
 function App() {
@@ -10,6 +10,8 @@ function App() {
     const password = useInput('')
 
     const [value, setValue] = useState('')
+
+    const [todos, setTodos] = useState([])
 
     const debouncedSearch = useDebounce(searchTodo, 500)
 
@@ -27,6 +29,12 @@ function App() {
 
   return (
     <div>
+        <section>
+            {todos.map(todo =>
+                <div key={todo.id} style={{padding: 30, border: '2px solid tomato'}}>{todo.title}</div>
+            )}
+        </section>
+
         <section>
             <input type="text" placeholder='search' value={value} onChange={onChange}/>
         </section>
