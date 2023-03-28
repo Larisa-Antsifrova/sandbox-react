@@ -7,7 +7,11 @@ export default function (request){
 
     useEffect(()=>{
         setLoading(true)
-        request().then(response => setData(response.data)).catch(error => setError(error)).finally(() => setLoading(false))
+
+        request()
+            .then(response => setData(response.data))
+            .catch(error => setError(error))
+            .finally(() => setLoading(false))
     }, [])
 
     return [data, loading, error]

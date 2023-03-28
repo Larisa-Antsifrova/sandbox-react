@@ -4,6 +4,8 @@ import Hover from "./components/Hover";
 import List from './components/List'
 import React, {useState} from "react";
 import useDebounce from "./hooks/useDebounce";
+import useRequest from "./hooks/useRequest";
+import axios from 'axios'
 
 function App() {
     const username = useInput('')
@@ -11,9 +13,11 @@ function App() {
 
     const [value, setValue] = useState('')
 
-    const [todos, setTodos] = useState([])
-
     const debouncedSearch = useDebounce(searchTodo, 500)
+
+    const [todos, isLoading, error] = useRequest()
+
+    function fetchTodos(){}
 
     function searchTodo (query){
         fetch(`https://jsonplaceholder.typicode.com/todos?query=${query}`)
