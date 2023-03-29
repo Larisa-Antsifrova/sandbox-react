@@ -15,9 +15,19 @@ function App() {
 
     const debouncedSearch = useDebounce(searchTodo, 500)
 
-    const [todos, isLoading, error] = useRequest()
+    const [todos, isLoading, error] = useRequest(fetchTodos)
 
-    function fetchTodos(){}
+    if (isLoading) {
+        return <h1>Loading...</h1>
+    }
+
+    if (error){
+        return <h1>Error occurred. Try again!</h1>
+    }
+
+    function fetchTodos(){
+        return axios.get('https://jsonplaceholder.typicode.com/todos')
+    }
 
     function searchTodo (query){
         fetch(`https://jsonplaceholder.typicode.com/todos?query=${query}`)
@@ -34,7 +44,7 @@ function App() {
   return (
     <div>
         <section>
-            {todos.map(todo =>
+            {todos && todos.map(todo =>
                 <div key={todo.id} style={{padding: 30, border: '2px solid tomato'}}>{todo.title}</div>
             )}
         </section>
