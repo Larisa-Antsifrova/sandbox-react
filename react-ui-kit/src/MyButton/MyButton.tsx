@@ -1,6 +1,11 @@
-import React from 'react'
+import React, {FC} from 'react'
 
-const MyButton = ({children, ...props}) => {
+export interface MyButtonProps {
+  color: string
+  big: boolean
+}
+
+const MyButton: FC<MyButtonProps> = ({children, ...props}) => {
   return (
     <button {...props}>
       {children}
