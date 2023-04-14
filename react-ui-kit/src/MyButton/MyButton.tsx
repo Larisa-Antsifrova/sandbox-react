@@ -1,6 +1,7 @@
-import React, {FC} from 'react'
+import React, { FC, ReactNode } from 'react'
 
 export interface MyButtonProps {
+  children: ReactNode
   color: string
   big: boolean
 }
