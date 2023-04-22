@@ -6,6 +6,7 @@ module.exports= {
     output: {
         filename: 'index.js',
         path: path.resolve(__dirname, 'dist'),
+        libraryTarget: 'umd',
         clean: true
     },
     resolve: {
@@ -13,5 +14,8 @@ module.exports= {
     },
     externals: {
         react: 'react'
+    },
+    module: {
+        rules: [{test: /\.(ts|tsx)?$/, use: 'ts-loader', exclude: /node_modules/}],
     }
 }
